@@ -41,8 +41,9 @@ get "/create" do
   erb :create, layout: :blog_template
 end
 
-post "/view/:id" do |blog_id|
-  # TODO: Display title and body for given id
+get "/view/:id" do |blog_id|
+  @post = Blog.get(blog_id)
+
   # TODO: Add form to add new comments
   # TODO: Display existing comments ordered from newest to oldest
   erb :view, layout: :blog_template
