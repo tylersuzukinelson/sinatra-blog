@@ -96,8 +96,10 @@ end
 
 delete "/admin/delete/:id" do |blog_id|
   if session[:my_session_id] == "durr"
-    # TODO: Delete the given blog post
-    # TODO: Delete the associated comments
+    Blog.get(blog_id).destroy
+    DataMapper.repository(:comments) {
+      Comment.all(blog_id: blog_id).destroy
+    }
     redirect to("/admin")
   else
     erb :login, layout: :blog_template
