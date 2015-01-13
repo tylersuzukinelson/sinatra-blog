@@ -1,0 +1,32 @@
+<h1>Create a new blog post</h1>
+
+<form action="/create" method="post">
+  <table>
+    <tr>
+      <td>
+        <label name="title">
+          Title
+        </label>
+      </td>
+      <td>
+        <input type="text" name="title" id="title" required />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label name="body">
+          Blog Post
+        </label>
+      </td>
+      <td>
+        <textarea name="body" id="body" required></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="Save" />
+      </td>
+    </tr>
+  </table>
+</form>

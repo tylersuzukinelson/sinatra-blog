@@ -50,11 +50,18 @@ end
 
 get "/create" do
   if session[:my_session_id] == "durr"
-    # TODO: Add form to add a blog title and body
     erb :create, layout: :blog_template
   else
     erb :login, layout: :blog_template
   end
+end
+
+post "/create" do
+  Blog.create(
+    title: params[:title],
+    body: params[:body]
+  )
+  redirect to("/")
 end
 
 get "/view/:id" do |blog_id|
