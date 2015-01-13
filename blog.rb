@@ -32,15 +32,29 @@ DataMapper.repository(:comments) {
   Comment.auto_upgrade!
 }
 
+enable :sessions
+
 get "/" do
   @posts = Blog.all(:order => [:id.desc])
   erb :home, layout: :blog_template
 end
 
+post "/login" do
+  if params[:username] == 'temp_auth' && params[:password] == 'oogaboogaboo'
+    session[:my_session_id] = "durr"
+    redirect back
+  else
+    redirect back
+  end
+end
+
 get "/create" do
-  # TODO: Add requirement for user authentication
-  # TODO: Add form to add a blog title and body
-  erb :create, layout: :blog_template
+  if session[:my_session_id] == "durr"
+    # TODO: Add form to add a blog title and body
+    erb :create, layout: :blog_template
+  else
+    erb :login, layout: :blog_template
+  end
 end
 
 get "/view/:id" do |blog_id|
@@ -65,20 +79,29 @@ post "/view/comment/:id" do |post_id|
 end
 
 get "/admin" do
-  # TODO: Add requirement for user authentication
-  # TODO: Add links to delete or edit blog posts
-  erb :admin, layout: :blog_template
+  if session[:my_session_id] == "durr"
+    # TODO: Add links to delete or edit blog posts
+    erb :admin, layout: :blog_template
+  else
+    erb :login, layout: :blog_template
+  end
 end
 
 delete "/admin/delete/:id" do |blog_id|
-  # TODO: Add requirement for user authentication
-  # TODO: Delete the given blog post
-  # TODO: Delete the associated comments
-  redirect to("/admin")
+  if session[:my_session_id] == "durr"
+    # TODO: Delete the given blog post
+    # TODO: Delete the associated comments
+    redirect to("/admin")
+  else
+    erb :login, layout: :blog_template
+  end
 end
 
 patch "/admin/edit/:id" do |blog_id|
-  # TODO: Add requirement for user authentication
-  # TODO: allow the user to edit the title
-  erb :admin_edit, layout: :blog_template
+  if session[:my_session_id] == "durr"
+    # TODO: allow the user to edit the title
+    erb :admin_edit, layout: :blog_template
+  else
+    erb :login, layout: :blog_template
+  end
 end
