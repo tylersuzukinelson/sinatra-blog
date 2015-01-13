@@ -87,7 +87,7 @@ end
 
 get "/admin" do
   if session[:my_session_id] == "durr"
-    # TODO: Add links to delete or edit blog posts
+    @posts = Blog.all(order: [:id.desc])
     erb :admin, layout: :blog_template
   else
     erb :login, layout: :blog_template
@@ -104,7 +104,7 @@ delete "/admin/delete/:id" do |blog_id|
   end
 end
 
-patch "/admin/edit/:id" do |blog_id|
+get "/admin/edit/:id" do |blog_id|
   if session[:my_session_id] == "durr"
     # TODO: allow the user to edit the title
     erb :admin_edit, layout: :blog_template

@@ -1,0 +1,8 @@
+<% @posts.each do |post| %>
+
+<form action="/admin/delete/<%= post.id %>" method="post">
+  <input type="hidden" name="_method" value="delete" />
+  <input type="submit" value="Delete" /> <%= post.title %> [<a href="/admin/edit/<%= post.id %>">edit</a>]
+</form>
+
+<% end %>
