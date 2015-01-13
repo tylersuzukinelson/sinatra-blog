@@ -49,6 +49,19 @@ get "/view/:id" do |blog_id|
   erb :view, layout: :blog_template
 end
 
+post "/view/comment/:id" do |post_id|
+  DataMapper.repository(:comments) {
+    Comment.create(
+      blog_id: post_id,
+      author: params[:name],
+      email: params[:email],
+      title: params[:title],
+      body: params[:body]
+    )
+  }
+  redirect back
+end
+
 get "/admin" do
   # TODO: Add requirement for user authentication
   # TODO: Add links to delete or edit blog posts
