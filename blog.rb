@@ -22,6 +22,8 @@ class Comment
 
   property :id, Serial
   property :blog_id, Integer
+  property :author, String
+  property :email, String
   property :title, String
   property :body, Text
 end
@@ -43,8 +45,6 @@ end
 
 get "/view/:id" do |blog_id|
   @post = Blog.get(blog_id)
-
-  # TODO: Add form to add new comments
   # TODO: Display existing comments ordered from newest to oldest
   erb :view, layout: :blog_template
 end

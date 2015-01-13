@@ -3,3 +3,58 @@
 </h3>
 
 <%= @post.body.gsub(/\n/, "<br />") %>
+
+<hr>
+
+<form method="post" action="/view/comment/<%= @post.id %>">
+  <table>
+    <tr>
+      <td>
+        <label name="name">
+          Name
+        </label>
+      </td>
+      <td>
+        <input type="text" name="name" id="name" required />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label name="email">
+          E-mail
+        </label>
+      </td>
+      <td>
+        <input type="email" name="email" id="email" required />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label name="title">
+          Title
+        </label>
+      </td>
+      <td>
+        <input type="text" name="title" id="title" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label name="comment">
+          Your Comment
+        </label>
+      </td>
+      <td>
+        <textarea name="body" id="comment"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="Add Comment" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+<hr>
