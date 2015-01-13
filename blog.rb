@@ -45,7 +45,9 @@ end
 
 get "/view/:id" do |blog_id|
   @post = Blog.get(blog_id)
-  # TODO: Display existing comments ordered from newest to oldest
+  DataMapper.repository(:comments) {
+    @comments = Comment.all(blog_id: blog_id, order: [:id.desc])
+  }
   erb :view, layout: :blog_template
 end
 

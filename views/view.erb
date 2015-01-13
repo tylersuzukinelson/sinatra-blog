@@ -5,7 +5,9 @@
 <%= @post.body.gsub(/\n/, "<br />") %>
 
 <hr>
-
+<strong>Leave a comment</strong>
+<br />
+<br />
 <form method="post" action="/view/comment/<%= @post.id %>">
   <table>
     <tr>
@@ -58,3 +60,14 @@
 </form>
 
 <hr>
+
+<% @comments.each do |comment| %>
+
+  <strong><%= comment.title %></strong> by <a href="mailto:<%= comment.email %>"><%= comment.author %></a>
+  <br />
+  <br />
+  <%= comment.body.gsub(/\n/, "<br />") %>
+
+  <hr>
+
+<% end %>
