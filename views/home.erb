@@ -1,0 +1,11 @@
+<% @posts.each do |post| %>
+
+<h3>
+  <a href="/view/<%= post.id %>">
+    <%= post.title %>
+  </a>
+</h3>
+
+<%= post.body.length > 200 ? "#{post.body[0..200].gsub(/\\n/, "<br />")}..." : "#{post.body.gsub(/\\n/, "<br />")}" %>
+
+<% end %>

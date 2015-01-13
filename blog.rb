@@ -31,8 +31,7 @@ DataMapper.repository(:comments) {
 }
 
 get "/" do
-  # TODO: Display all blog titles and bodies
-  # TODO: Limit body displayed to 200 chars; for those > 200 chars, tail with "..."
+  @posts = Blog.all(:order => [:id.desc])
   erb :home, layout: :blog_template
 end
 
